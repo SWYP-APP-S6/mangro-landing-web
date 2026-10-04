@@ -1,6 +1,6 @@
 # 맹그로 랜딩 페이지
 
-맹그로 서비스의 랜딩 페이지를 제작하기 위한 Vite + React + TypeScript 프로젝트입니다.
+맹그로 서비스의 랜딩 페이지를 위한 Vite + React + TypeScript 프로젝트입니다.
 [Vite 공식 `react-ts` 템플릿](https://vite.dev/guide/)을 기반으로 구성했습니다.
 
 ## 개발 환경
@@ -14,10 +14,6 @@
 ## 시작하기
 
 ```sh
-# nvm을 사용하는 경우
-nvm use
-
-# package-lock.json에 기록된 버전으로 설치
 npm ci
 
 # 개발 서버 실행
@@ -41,11 +37,15 @@ npm run dev
 ## 주요 파일
 
 ```text
-public/               # 경로 그대로 제공할 정적 파일
+public/
+  fonts/              # 로컬 Pretendard 글꼴 및 OFL 라이선스
+  assets/             # Figma 원본 이미지, 아이콘 및 벡터
 src/
-  App.tsx             # 랜딩 페이지 시작 화면
-  App.css             # 시작 화면 스타일
-  index.css           # 전역 스타일 및 기본 색상 변수
+  components/         # CTA, 장식 이미지, 무한 카드 애니메이션 컴포넌트
+  config/links.ts     # Google Play 다운로드 주소
+  App.tsx             # 히어로, 핵심 가치, 이용 방법, 스토리 및 다운로드
+  App.css             # 페이지 레이아웃 및 반응형 스타일
+  index.css           # 글꼴, 전역 스타일, 브랜드 색상, 접근성 스타일
   main.tsx            # React 진입점
 index.html            # 한국어 문서, 페이지 제목 및 설명
 vite.config.ts        # Vite 및 React 플러그인 설정
@@ -53,13 +53,20 @@ tsconfig*.json        # 앱과 설정 파일의 TypeScript 설정
 eslint.config.js      # ESLint 설정
 ```
 
-현재 화면은 초기 구성 확인용입니다. 서비스 문구, 섹션, 로고 및 브랜드 스타일은
-후속 작업에서 `src/App.tsx`와 CSS에 반영합니다. 작은 단일 페이지로 시작하며,
-재사용할 UI가 생기면 `src/components/` 등으로 분리합니다.
+## 디자인
+CSS 클래스명은 `hero-app-preview` 같은 kebab-case 형식으로 작성합니다.
+에셋 파일명은 `prefix_snake_case` 형식으로 작성합니다.
 
-환경변수가 필요하면 `.env.local`을 사용합니다. `VITE_` 접두사가 붙은 값은
-클라이언트 번들에 포함되므로 비밀값을 넣지 않습니다. 공유할 변수 이름은
-`.env.example`에 기록하고, 실제 환경변수 파일은 Git에 커밋하지 않습니다.
+- `image_`: 일반 이미지와 래스터 마스크 (`.png`, `.jpg` 등)
+- `icon_`: UI 아이콘과 앱 아이콘 (파일 형식과 무관)
+- `vector_`: 로고, 말풍선 꼬리, SVG 마스크 등 벡터 그래픽
+
+핵심 가치 카드는 반복 이동하며, 화면 중앙에서의 거리에 따라 `600 → 300 → 100` 색상으로 변화합니다.
+중앙에서 두 칸 이상 떨어진 카드의 내용은 사라지며, 이동에 따라 부드럽게 나타나거나 사라집니다.
+마우스 호버와 키보드 포커스에서는 이동을 멈추고, 동작 줄이기 설정에서는 정적인 카드 목록을 표시합니다.
+
+[Pretendard](https://github.com/orioncactus/pretendard) 1.3.9 가변 글꼴을 로컬에서 제공합니다.
+라이선스는 `public/fonts/OFL.txt`에 포함되어 있습니다.
 
 프로덕션 배포 시 `dist/`를 정적 호스팅에 업로드합니다.
 `npm run preview`는 로컬 확인용 서버입니다.

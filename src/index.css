@@ -1,16 +1,35 @@
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/fonts/PretendardVariable.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 45 920;
+  font-display: swap;
+}
+
 :root {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  color: var(--color-text);
-  background: var(--color-background);
-  line-height: 1.6;
+  font-family: 'Pretendard', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--color-title);
+  background: var(--color-surface);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color-scheme: light;
 
-  --color-background: #fafaf9;
-  --color-text: #202420;
-  --color-text-muted: #606660;
+  --color-primary: #ff6900;
+  --color-primary-strong: #ff8b00;
+  --color-primary-subtle: #ffd2b2;
+  --color-primary-100: #ffebb2;
+  --color-primary-300: #ffd24c;
+  --color-primary-600: #ffaf00;
+  --color-primary-700: #ff9c00;
+  --color-surface: #f5f6fa;
+  --color-title: #333;
+  --color-body: #616161;
+  --color-icon: #212121;
+  --color-brown: #6b533e;
+  --color-green: #14b857;
+  --color-mint: #c2e9cc;
 }
 
 *,
@@ -19,9 +38,29 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   min-width: 320px;
   margin: 0;
+}
+
+#root {
+  container-type: inline-size;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 button,
@@ -31,12 +70,59 @@ select {
   font: inherit;
 }
 
-img,
-svg {
-  display: block;
-  max-width: 100%;
+button {
+  border: 0;
 }
 
 img {
+  display: block;
+  max-width: 100%;
   height: auto;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-brown);
+  outline-offset: 6px;
+}
+
+[id] {
+  scroll-margin-top: 32px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10;
+  padding: 12px 20px;
+  border-radius: 12px;
+  color: var(--color-brown);
+  background: white;
+  transform: translateY(-160%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
 }
